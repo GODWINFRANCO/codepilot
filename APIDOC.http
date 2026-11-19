@@ -1,0 +1,214 @@
+#api call for create admin
+###
+POST http://127.0.0.1:8000/accounts/admin/register/
+Content-Type: application/json
+
+{
+    "username":"admin",
+    "email":"admin@gmail.com",
+    "password":"admin@123",
+    "phone":9499839223
+}
+
+#api call for create student
+###
+POST http://127.0.0.1:8000/accounts/student/register/
+Content-Type: application/json
+
+{
+    "username":"student1",
+    "email":"godwinfranco87@gmail.com",
+    "password":"password@123",
+    "phone":908945595
+}
+
+# api call for jwt token creation
+###
+POST http://127.0.0.1:8000/accounts/jwt/token/
+Content-Type: application/json
+
+{
+    "username": 908934595,
+    "password":"password@123"
+}
+
+# api call for refresh jwt token
+###
+POST http://127.0.0.1:8000/accounts/jwt/token/refresh/
+Content-Type: application/json
+
+{
+    "refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc5MzcyODcxNiwiaWF0IjoxNzkzNjQyMzE2LCJqdGkiOiIwOTdmMTBiN2JiZjU0YmYyOTNjNGI5YzhhMDk4OThmYiIsInVzZXJfaWQiOiIyIn0.WyQPKAfEd72jq6q-9AtgJLDBoQlAB741yLHODbRFUCo"
+}
+
+#api call for token
+###
+POST http://127.0.0.1:8000/exam/token/
+Content-Type: application/json
+
+{
+    "username":"godwin",
+    "password":"password@123"
+}
+
+# admin,admin2123 - 430cfa3a4e71b30aaa5681264ac576c89591d916
+# godwin,password@123 - 9d2cc2103e44a93c3fe12fed092760e377669e96
+
+#api call for listing exams
+###
+get http://127.0.0.1:8000/exam/assesment/all/
+Accept: application/json
+Authorization: Token 430cfa3a4e71b30aaa5681264ac576c89591d916
+
+#api call for creating exams
+###
+post http://127.0.0.1:8000/exam/assesment/add/
+Content-Type: application/json
+Authorization: Token 430cfa3a4e71b30aaa5681264ac576c89591d916
+
+{
+    
+    "title": "java Assessment",
+    "batch": "Python Batch 01",
+    "language": "Java",
+    "examdate": "2026-12-10",
+    "duration": 2,
+    "starttime": "12:00:00",
+    "status": "scheduled"
+
+}
+
+#api call for retreive exams
+###
+GET  http://127.0.0.1:8000/exam/assesment/3/
+Accept: application/json
+Authorization: Token 430cfa3a4e71b30aaa5681264ac576c89591d916
+
+#api call for updating exams
+###
+put http://127.0.0.1:8000/exam/assesment/3/
+Content-Type: application/json
+Authorization: Token 430cfa3a4e71b30aaa5681264ac576c89591d916
+
+{
+
+    "title": "Python Assessment",
+    "batch": "Python Batch 03",
+    "language": "Python",
+    "examdate": "2026-12-10",
+    "duration": 2,
+    "starttime": "12:00:00",
+    "status": "scheduled"
+
+}
+
+#api call for delete exams
+###
+delete http://127.0.0.1:8000/exam/assesment/1/
+Accept: application/json
+Authorization: Token 430cfa3a4e71b30aaa5681264ac576c89591d916
+
+#api call for adding questions 
+###
+POST http://127.0.0.1:8000/problem/assesment/3/questions/
+Content-Type:  application/json
+Authorization: Token 430cfa3a4e71b30aaa5681264ac576c89591d916
+
+{
+    "title": "write a program to add two numbers",
+    "description":"pgm to add two numbers",
+    "score": "80",
+    "sample_input":"2 add 2",
+    "sample_output":"4",
+    "question_number": 1
+}
+
+#api call for retrieve one questions 
+###
+GET http://127.0.0.1:8000/problem/questions/3/
+Accept: application/json
+Authorization: Token 430cfa3a4e71b30aaa5681264ac576c89591d916
+
+# api call for updating one question 
+###
+PUT http://127.0.0.1:8000/problem/questions/3/
+Content-Type: application/json
+Authorization: Token 430cfa3a4e71b30aaa5681264ac576c89591d916
+
+{
+  "id": 3,
+  "title": "write a program to add two numbers",
+  "description": "pgm to add two numbers",
+  "score": 80,
+  "sample_input": "2 add 2",
+  "sample_output": "4",
+  "created_at": "2026-10-26T17:41:12.067818Z",
+  "question_number": 1,
+  "updated_at": "2026-10-26T17:44:56.205074Z",
+  "assessment": 2,
+  "created_by": 1
+}
+
+# api call for deleting one question
+###
+DELETE http://127.0.0.1:8000/problem/questions/1/
+Accept: application/json
+Authorization: Token 430cfa3a4e71b30aaa5681264ac576c89591d916
+
+# ========= SUBMISSION START,RETRIEVE VIEW ============= #
+
+
+# api call for submission start
+###
+POST http://127.0.0.1:8000/evaluation/assessment/5/submission/
+Content-Type: application/json
+Authorization: Token 9d2cc2103e44a93c3fe12fed092760e377669e96
+
+# api call for submission retrieve 
+###
+GET http://127.0.0.1:8000/evaluation/submission/5/
+Accept: application/json
+Authorization: Token 430cfa3a4e71b30aaa5681264ac576c89591d916
+
+
+# ========= ANSWER CREATE VIEW ============= #
+
+
+# api call to add answer
+###
+POST http://127.0.0.1:8000/evaluation/submission/5/answer/
+Content-Type: application/json
+Authorization: Token 9d2cc2103e44a93c3fe12fed092760e377669e96
+
+{
+    "question":1,
+    "answer_text":"10"
+}
+
+# answer evaluate
+###
+PATCH http://127.0.0.1:8000/evaluation/answer/5/
+Content-Type: application/json
+Authorization: Token 430cfa3a4e71b30aaa5681264ac576c89591d916
+
+{
+    "marks_awarded":15,
+    "feedback":"good"
+}
+
+#------student profile---
+#api call for profile update
+###
+PUT http://127.0.0.1:8000/accounts/profile/complete/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzkzNjg4NzE5LCJpYXQiOjE3OTM2ODg0MTksImp0aSI6ImZjMDcwMDU1ZDVmMDRkNzhhNjM0NDAxZTllOGY3NjI4IiwidXNlcl9pZCI6IjMifQ.XSrxOObIygVza9MQz5CvMb5uKHjzfxLxCHJbkSV5jpE
+
+{
+
+    "skills":"html,css,js,python",
+    "qualification":"mca",
+    "passout_year":"2026",
+    "github_url": "http://sajay.com",
+    "linkedin_url": "http://sajay.com"
+
+}
